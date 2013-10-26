@@ -22,51 +22,72 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<?php echo $this->Html->charset(); ?>
-	<title>
-		<?php echo 'Colores Pintuco' //$cakeDescription ?>:
-		<?php echo $title_for_layout; ?>
-	</title>
-	<?php
-		echo $this->Html->meta('icon');
+    <?php echo $this->Html->charset(); ?>
+    <title>
+        <?php echo 'Colores Pintuco' //$cakeDescription ?>:
+        <?php echo $title_for_layout; ?>
+    </title>
+    <?php
 
-		echo $this->Html->css('cake.generic');
-        echo $this->Html->css('styles');
+    // meta
+    echo $this->Html->meta('icon');
 
-        echo $this->Html->script('dymo.label.framework');
+    // styles
+    echo $this->Html->css('cake.generic');
+    echo $this->Html->css('superfish');
+    echo $this->Html->css('superfish-navbar');
+    echo $this->Html->css('superfish-vertical');
+    echo $this->Html->css('megafish');
+    echo $this->Html->css('styles');
 
-        if(Configure::read('debug')) {
-            echo $this->Html->script('jquery-1.10.2');
-            //echo $this->Html->script('jquery-migrate-1.2.1');
-        } else {
-            echo $this->Html->script('jquery-1.10.2.min');
-            //echo $this->Html->script('jquery-migrate-1.2.1.min');
-        }
+    // scripts
+    echo $this->Html->script('dymo.label.framework');
 
-		echo $this->fetch('meta');
-		echo $this->fetch('css');
-		echo $this->fetch('script');
-	?>
+    if (Configure::read('debug')) {
+        echo $this->Html->script('jquery-1.10.2');
+        //echo $this->Html->script('jquery-migrate-1.2.1');
+    } else {
+        echo $this->Html->script('jquery-1.10.2.min');
+        //echo $this->Html->script('jquery-migrate-1.2.1.min');
+    }
+
+    echo $this->Html->script('hoverIntent');
+
+    if (Configure::read('debug')) {
+        echo $this->Html->script('superfish');
+    } else {
+        echo $this->Html->script('superfish.min');
+    }
+
+    echo $this->Html->script('supersubs');
+    echo $this->Html->script('sitewide');
+
+    echo $this->fetch('meta');
+    echo $this->fetch('css');
+    echo $this->fetch('script');
+    ?>
 </head>
 <body>
-	<div id="container">
-		<div id="header">
-			<?php /* <h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1> */ ?>
-		</div>
-		<div id="content">
-			<?php echo $this->Session->flash(); ?>
-			<?php echo $this->fetch('content'); ?>
-		</div>
-		<div id="footer">
-			<?php
-                /* echo $this->Html->link(
-					$this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
-					'http://www.cakephp.org/',
-					array('target' => '_blank', 'escape' => false)
-				); */
-			?>
-		</div>
-	</div>
-	<?php echo $this->element('sql_dump'); ?>
+<div id="container">
+    <div id="header">
+        <?php /* <h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1> */ ?>
+        <?php echo $this->element('menu'); ?>
+    </div>
+    <div id="content">
+        <?php echo $this->Session->flash(); ?>
+        <?php echo $this->Session->flash('auth'); ?>
+        <?php echo $this->fetch('content'); ?>
+    </div>
+    <div id="footer">
+        <?php
+        /* echo $this->Html->link(
+            $this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
+            'http://www.cakephp.org/',
+            array('target' => '_blank', 'escape' => false)
+        ); */
+        ?>
+    </div>
+</div>
+<?php echo $this->element('sql_dump'); ?>
 </body>
 </html>

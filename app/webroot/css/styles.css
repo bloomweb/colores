@@ -1,0 +1,54 @@
+/* Acomodar los mensajes de sistema */
+div#authMessage, div#flashMessage {
+    margin: 1% auto;
+    text-align: center;
+    width: 720px;
+}
+/* Paginador botones first y last */
+.paging .first {
+    border-radius: 4px 0 0 4px;
+    border-style: solid none solid solid;
+    border-width: 1px;
+    margin-right: -3px;
+}
+.paging .last {
+    border-radius: 0 4px 4px 0;
+    margin-left: -3px;
+}
+/* ocultar los menús y enlaces de acciones que se generan por defecto */
+div.actions {
+    display: none;
+    float: none;
+    padding: 0;
+    width: 0;
+}
+/* Acomodar el menú a la derecha */
+ul#menu {
+    float: right;
+    width: auto;
+}
+/* ajustar el tamaño del contenido para acomodar con el espacio que ha quedado en blanco */
+div.form, div.index, div.view {
+    border-left: 0 none;
+    float: none;
+    padding: 5px 0;
+    width: 100%;
+}
+/* Ajustar la ventana de login */
+div.login {
+    margin-left: auto;
+    margin-right: auto;
+    width: 240px;
+}
+div.login form * {
+    margin: 6px auto 0;
+    text-align: center;
+}
+div.login fieldset {
+    position: relative;
+}
+div.login legend {
+    left: 12%;
+    position: absolute;
+    top: -15px;
+}

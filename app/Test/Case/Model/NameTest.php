@@ -14,7 +14,8 @@ class NameTest extends CakeTestCase {
  */
 	public $fixtures = array(
 		'app.name',
-		'app.barcode'
+		'app.barcode',
+		'app.size'
 	);
 
 /**

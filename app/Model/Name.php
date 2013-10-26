@@ -14,6 +14,49 @@ class Name extends AppModel {
  */
 	public $displayField = 'name';
 
+/**
+ * Validation rules
+ *
+ * @var array
+ */
+	public $validate = array(
+		'code' => array(
+			'notEmpty' => array(
+				'rule' => array('notEmpty'),
+				'message' => 'Debe de ingresar un valor para el código',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+            'isUnique' => array(
+                'rule' => array('isUnique'),
+                'message' => 'Existe un registro con este código',
+                //'allowEmpty' => false,
+                //'required' => false,
+                //'last' => false, // Stop validation after this rule
+                //'on' => 'create', // Limit validation to 'create' or 'update' operations
+            ),
+		),
+		'name' => array(
+			'notEmpty' => array(
+				'rule' => array('notEmpty'),
+				'message' => 'Debe de ingresar un valor para el nombre',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+            'isUnique' => array(
+                'rule' => array('isUnique'),
+                'message' => 'Existe un registro con este nombre',
+                //'allowEmpty' => false,
+                //'required' => false,
+                //'last' => false, // Stop validation after this rule
+                //'on' => 'create', // Limit validation to 'create' or 'update' operations
+            ),
+		),
+	);
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
