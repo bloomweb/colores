@@ -95,6 +95,10 @@ form#label-form .barcode, form#label-form .namecode {
 .namecode {
     float: right;
 }
+img#label-preview-image {
+    display: block;
+    margin: auto;
+}
 /* Ajustar la ventana de login */
 div.login {
     margin-left: auto;
