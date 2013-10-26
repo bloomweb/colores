@@ -1,3 +1,4 @@
+/* -------------------- GENERIC -------------------- */
 /* Acomodar los mensajes de sistema */
 div#authMessage, div#flashMessage {
     margin: 1% auto;
@@ -34,6 +35,38 @@ div.form, div.index, div.view {
     padding: 5px 0;
     width: 100%;
 }
+/* -------------------- FRONT -------------------- */
+/* Formulario para imprimir la etiqueta */
+form#label-form {
+    width: 100%;
+}
+form#label-form fieldset {
+    border: 1px solid #000000;
+}
+.wrapper.height1 fieldset {
+    min-height: 80px;
+}
+.wrapper.height2 fieldset {
+    min-height: 160px;
+}
+.wrapper.image, .wrapper.submit {
+    text-align: center;
+    width: 100%;
+}
+.wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+}
+.wrapper.left, .wrapper.right {
+    display: inline-block;
+    width: 48%;
+}
+.wrapper.left {
+}
+.wrapper.right {
+    float: right;
+}
 /* Ajustar la ventana de login */
 div.login {
     margin-left: auto;
@@ -52,3 +85,4 @@ div.login legend {
     position: absolute;
     top: -15px;
 }
+/* -------------------- BACK -------------------- */

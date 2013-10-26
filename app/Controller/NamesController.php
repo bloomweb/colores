@@ -9,6 +9,15 @@ App::uses('AppController', 'Controller');
 class NamesController extends AppController
 {
 
+    public function beforeFilter() {
+        parent::beforeFilter();
+        $this->Auth->allow('getOptions');
+    }
+
+    public function getOptions() {
+        return $this->Name->find('list');
+    }
+
     /**
      * Components
      *
