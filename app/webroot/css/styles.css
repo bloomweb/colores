@@ -40,6 +40,27 @@ div.form, div.index, div.view {
 form#label-form {
     width: 100%;
 }
+form#label-form div#flashMessage {
+    width: 90%;
+}
+form#label-form label {
+    float: left;
+    padding: 4px 0;
+}
+form#label-form input, form#label-form select {
+    margin-left: 10px;
+    max-width: 70%;
+    text-align: center;
+}
+form#label-form .submit input {
+    margin-left: 0;
+    max-width: 70%;
+    text-align: center;
+}
+form#label-form .input.text {
+    margin: 0 auto;
+    width: 90%;
+}
 form#label-form fieldset {
     border: 1px solid #000000;
 }
@@ -62,9 +83,16 @@ form#label-form fieldset {
     display: inline-block;
     width: 48%;
 }
-.wrapper.left {
-}
 .wrapper.right {
+    float: right;
+}
+form#label-form .barcode, form#label-form .namecode {
+    border: 0 none;
+    display: inline-block;
+    min-height: 78px;
+    width: 48%;
+}
+.namecode {
     float: right;
 }
 /* Ajustar la ventana de login */

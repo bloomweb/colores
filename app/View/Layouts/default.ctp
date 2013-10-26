@@ -61,6 +61,7 @@
 
     echo $this->Html->script('supersubs');
     echo $this->Html->script('sitewide');
+    echo $this->Html->script('print-label');
 
     echo $this->fetch('meta');
     echo $this->fetch('css');

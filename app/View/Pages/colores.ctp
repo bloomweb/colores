@@ -34,6 +34,7 @@ echo $this->Form->create(
         <div class="wrapper left">
             <fieldset>
                 <legend>Vista Previa</legend>
+                <div class="preview"></div>
             </fieldset>
         </div>
         <div class="wrapper right">
