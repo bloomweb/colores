@@ -16,7 +16,7 @@ class LabelsController extends AppController
             $xml = file_get_contents($path);
             echo $xml;
         } else {
-            echo 0;
+            echo $path;
         }
         exit(0);
     }
