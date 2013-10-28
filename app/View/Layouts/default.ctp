@@ -18,7 +18,7 @@
  */
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="es" dir="ltr">
 <head>
     <?php echo $this->Html->charset(); ?>
     <title>
