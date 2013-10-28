@@ -1,5 +1,20 @@
 <div class="names index">
     <h2><?php echo __('Colores'); ?></h2>
+    <table class="filtros barcodes">
+        <tr>
+            <?php echo $this->Form->create('Name', array('action' => 'index/1')); ?>
+            <td class="title">Filtro</td>
+            <td class="label">Código</td><td class="input"><?php echo $this->Form->input('code', array('div' => false, 'label' => false, 'type' => 'text', 'placeholder' => 'Contenido del código', 'required' => false, 'maxlength' => 12)); ?></td>
+            <td class="label">Color</td><td class="input"><?php echo $this->Form->input('name', array('div' => false, 'label' => false, 'type' => 'text', 'placeholder' => 'Contenido del color', 'required' => false, 'maxlength' => 12)); ?></td>
+            <td class="submit filter"><?php echo $this->Form->submit('Filtrar', array('div' => false)); ?></td>
+            <?php echo $this->Form->end(); ?>
+            <?php if($this->Session->read('Filtros.name.active')): ?>
+                <?php echo $this->Form->create('Name', array('action' => 'index')); ?>
+                <td class="submit reset"><?php echo $this->Form->submit('Quitar Filtros', array('div' => false)); ?></td>
+                <?php echo $this->Form->end(); ?>
+            <?php endif; ?>
+        </tr>
+    </table>
     <table cellpadding="0" cellspacing="0">
         <tr>
             <th><?php echo $this->Paginator->sort('id', 'ID'); ?></th>

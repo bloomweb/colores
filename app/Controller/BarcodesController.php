@@ -17,14 +17,38 @@ class BarcodesController extends AppController
     public $components = array('Paginator');
 
     /**
-     * admin_index method
-     *
+     * @param int $filter
      * @return void
      */
-    public function admin_index()
+    public function admin_index($filter = 0)
     {
         $this->Barcode->recursive = 0;
+
+        if($filter) {
+            $this->Session->write('Filtros.barcode.active', true);
+            $filterData = $this->Session->read('Filtros.barcode.data');
+            if(empty($filterData)) {
+                $this->Session->write('Filtros.barcode.data', $this->request->data);
+            } elseif(!empty($this->request->data)) {
+                $this->Session->write('Filtros.barcode.data', $this->request->data);
+            }
+            $this->request->data = $this->Session->read('Filtros.barcode.data');
+            $conditions = array();
+            if($this->Session->read('Filtros.barcode.data.Barcode.size_id')) $conditions['Barcode.size_id'] = $this->Session->read('Filtros.barcode.data.Barcode.size_id');
+            if($this->Session->read('Filtros.barcode.data.Barcode.name_id')) $conditions['Barcode.name_id'] = $this->Session->read('Filtros.barcode.data.Barcode.name_id');
+            if($this->Session->read('Filtros.barcode.data.Barcode.barcode')) $conditions['Barcode.barcode LIKE'] = '%' . $this->Session->read('Filtros.barcode.data.Barcode.barcode') . '%';
+            $this->paginate = array(
+                'conditions' => $conditions
+            );
+        } else {
+            $this->Session->write('Filtros.barcode.active', false);
+            $this->Session->write('Filtros.barcode.data', array());
+        }
+
+        $this->set('sizes', $this->Barcode->Size->find('list'));
+        $this->set('names', $this->Barcode->Name->find('list'));
         $this->set('barcodes', $this->Paginator->paginate());
+
     }
 
     /**

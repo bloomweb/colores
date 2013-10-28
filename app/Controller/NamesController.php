@@ -30,9 +30,30 @@ class NamesController extends AppController
      *
      * @return void
      */
-    public function admin_index()
+    public function admin_index($filter = 0)
     {
         $this->Name->recursive = 0;
+
+        if($filter) {
+            $this->Session->write('Filtros.name.active', true);
+            $filterData = $this->Session->read('Filtros.name.data');
+            if(empty($filterData)) {
+                $this->Session->write('Filtros.name.data', $this->request->data);
+            } elseif(!empty($this->request->data)) {
+                $this->Session->write('Filtros.name.data', $this->request->data);
+            }
+            $this->request->data = $this->Session->read('Filtros.name.data');
+            $conditions = array();
+            if($this->Session->read('Filtros.name.data.Name.code')) $conditions['Name.code LIKE'] = '%' . $this->Session->read('Filtros.name.data.Name.code') . '%';
+            if($this->Session->read('Filtros.name.data.Name.name')) $conditions['Name.name LIKE'] = '%' . $this->Session->read('Filtros.name.data.Name.name') . '%';
+            $this->paginate = array(
+                'conditions' => $conditions
+            );
+        } else {
+            $this->Session->write('Filtros.name.active', false);
+            $this->Session->write('Filtros.name.data', array());
+        }
+        
         $this->set('names', $this->Paginator->paginate());
     }
 

@@ -33,6 +33,7 @@ class LogsController extends AppController
                     'color' => $barcode['Name']['name'],
                     'tamaño' => $barcode['Size']['amount'],
                     'barcode_id' => $barcode['Barcode']['id'],
+                    'barcode' => $barcode['Barcode']['barcode'],
                     'tanda_base' => $_POST['tanda_base']
                 )
             );
@@ -56,9 +57,31 @@ class LogsController extends AppController
      *
      * @return void
      */
-    public function admin_index()
+    public function admin_index($filter = 0)
     {
         $this->Log->recursive = 0;
+
+        if($filter) {
+            $this->Session->write('Filtros.log.active', true);
+            $filterData = $this->Session->read('Filtros.log.data');
+            if(empty($filterData)) {
+                $this->Session->write('Filtros.log.data', $this->request->data);
+            } elseif(!empty($this->request->data)) {
+                $this->Session->write('Filtros.log.data', $this->request->data);
+            }
+            $this->request->data = $this->Session->read('Filtros.log.data');
+            $conditions = array();
+            if($this->Session->read('Filtros.log.data.Log.color')) $conditions['Log.color LIKE'] = '%' . $this->Session->read('Filtros.log.data.Log.color') . '%';
+            if($this->Session->read('Filtros.log.data.Log.tamaño')) $conditions['Log.tamaño LIKE'] = '%' . $this->Session->read('Filtros.log.data.Log.tamaño') . '%';
+            if($this->Session->read('Filtros.log.data.Log.barcode')) $conditions['Log.barcode LIKE'] = '%' . $this->Session->read('Filtros.log.data.Log.barcode') . '%';
+            $this->paginate = array(
+                'conditions' => $conditions
+            );
+        } else {
+            $this->Session->write('Filtros.log.active', false);
+            $this->Session->write('Filtros.log.data', array());
+        }
+        
         $this->set('logs', $this->Paginator->paginate());
     }
 
