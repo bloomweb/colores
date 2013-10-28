@@ -4,7 +4,7 @@ $(function () {
      * Manejo de la impresora
      */
 
-    // stores loaded label info
+    // stores loaded label and printer info
     var label;
     var printers;
 
@@ -24,22 +24,8 @@ $(function () {
     function verificarImpresora() {
         printers = dymo.label.framework.getPrinters();
         if (printers.length == 0) {
-            alert("No se detecta una impresora.");
+            alert("No se detecta una impresora DYMO en su equipo.");
         }
-    }
-
-    /**
-     * Generates label preview and updates corresponend <img> element
-     * Note: this does not work in IE 6 & 7 because they don't support data urls
-     * if you want previews in IE 6 & 7 you have to do it on the server side
-     */
-    function updatePreview() {
-        if (!label)
-            return;
-
-        var pngData = label.render();
-
-        $('#label-preview-image').attr('src', "data:image/png;base64," + pngData);
     }
 
     /**
@@ -54,6 +40,19 @@ $(function () {
 
     function getSelectedColor() {
         return $('#LabelPintura').val();
+    }
+
+    /**
+     * Generates label preview and updates corresponend <img> element
+     * Note: this does not work in IE 6 & 7 because they don't support data urls
+     * if you want previews in IE 6 & 7 you have to do it on the server side
+     */
+    function updatePreview() {
+        if (!label) return;
+
+        var pngData = label.render();
+
+        $('#label-preview-image').attr('src', "data:image/png;base64," + pngData);
     }
 
     function loadPreview() {
@@ -88,9 +87,9 @@ $(function () {
         loadPreview();
     });
 
-    setInterval(function() { checkTextValue($('#input_id').val()); }, 250);
+    setInterval(function() { checkTextValue(); }, 250);
 
-    function checkTextValue(val) {
+    function checkTextValue() {
         label.setObjectText('Garanty', $('#LabelTandaBase').val());
         updatePreview();
     }
