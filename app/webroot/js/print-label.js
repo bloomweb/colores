@@ -5,8 +5,7 @@ $(function () {
      */
 
     // stores loaded label and printer info
-    var label;
-    var printers;
+    var label = {}, printers = {};
 
     verificarImpresora();
     loadLabel();
