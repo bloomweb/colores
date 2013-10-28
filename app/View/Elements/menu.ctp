@@ -22,6 +22,7 @@
         <li>
             <a href="/admin/logs">Registros</a>
         </li>
+        <li><a href="/admin/users/edit/1">Modificar Usuario</a></li>
         <li><a href="/admin/users/logout">Cerrar Sesión</a></li>
     <?php } else { ?>
         <li><a href="/admin/users/login">Iniciar Sesión</a></li>
