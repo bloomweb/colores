@@ -26,33 +26,6 @@ class NamesController extends AppController
     public $components = array('Paginator');
 
     /**
-     * index method
-     *
-     * @return void
-     */
-    public function index()
-    {
-        $this->Name->recursive = 0;
-        $this->set('names', $this->Paginator->paginate());
-    }
-
-    /**
-     * view method
-     *
-     * @throws NotFoundException
-     * @param string $id
-     * @return void
-     */
-    public function view($id = null)
-    {
-        if (!$this->Name->exists($id)) {
-            throw new NotFoundException(__('Dato no válido'));
-        }
-        $options = array('conditions' => array('Name.' . $this->Name->primaryKey => $id));
-        $this->set('name', $this->Name->find('first', $options));
-    }
-
-    /**
      * admin_index method
      *
      * @return void

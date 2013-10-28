@@ -8,16 +8,19 @@
             </ul>
         </li>
         <li>
+            <a href="/admin/names">Colores</a>
+            <ul>
+                <li><a href="/admin/names/add">Agregar</a></li>
+            </ul>
+        </li>
+        <li>
             <a href="/admin/sizes">Tamaños</a>
             <ul>
                 <li><a href="/admin/sizes/add">Agregar</a></li>
             </ul>
         </li>
         <li>
-            <a href="/admin/names">Colores</a>
-            <ul>
-                <li><a href="/admin/names/add">Agregar</a></li>
-            </ul>
+            <a href="/admin/logs">Registros</a>
         </li>
         <li><a href="/admin/users/logout">Cerrar Sesión</a></li>
     <?php } else { ?>

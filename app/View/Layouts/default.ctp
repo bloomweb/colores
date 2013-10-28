@@ -41,7 +41,6 @@
     echo $this->Html->css('styles');
 
     // scripts
-    echo $this->Html->script('dymo.label.framework');
 
     if (Configure::read('debug')) {
         echo $this->Html->script('jquery-1.10.2');
@@ -61,7 +60,11 @@
 
     echo $this->Html->script('supersubs');
     echo $this->Html->script('sitewide');
-    echo $this->Html->script('print-label');
+
+    if(!isset($this->params['prefix'])) {
+        echo $this->Html->script('dymo.label.framework');
+        echo $this->Html->script('print-label');
+    }
 
     echo $this->fetch('meta');
     echo $this->fetch('css');
@@ -70,24 +73,13 @@
 </head>
 <body>
 <div id="container">
-    <div id="header">
-        <?php /* <h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1> */ ?>
-        <?php echo $this->element('menu'); ?>
-    </div>
-    <div id="content">
+    <div id="header"><?php echo $this->element('menu'); ?></div>
+    <div id="content" class="<?php echo(isset($this->params['prefix']) ? 'layout-back' : 'layout-front'); ?>">
         <?php echo $this->Session->flash(); ?>
         <?php echo $this->Session->flash('auth'); ?>
         <?php echo $this->fetch('content'); ?>
     </div>
-    <div id="footer">
-        <?php
-        /* echo $this->Html->link(
-            $this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
-            'http://www.cakephp.org/',
-            array('target' => '_blank', 'escape' => false)
-        ); */
-        ?>
-    </div>
+    <div id="footer"></div>
 </div>
 <?php echo $this->element('sql_dump'); ?>
 </body>

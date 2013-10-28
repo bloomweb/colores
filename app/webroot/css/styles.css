@@ -40,6 +40,9 @@ div.form, div.index, div.view {
 form#label-form {
     width: 100%;
 }
+#content.layout-front {
+    background: none repeat scroll 0 0 #AAD4FF;
+}
 form#label-form div#flashMessage {
     width: 90%;
 }

@@ -16,6 +16,16 @@
             <?php echo h($name['Name']['name']); ?>
             &nbsp;
         </dd>
+        <dt><?php echo __('Creado'); ?></dt>
+        <dd>
+            <?php echo h($name['Name']['created']); ?>
+            &nbsp;
+        </dd>
+        <dt><?php echo __('Modificado'); ?></dt>
+        <dd>
+            <?php echo h($name['Name']['modified']); ?>
+            &nbsp;
+        </dd>
     </dl>
 </div>
 <div class="related">

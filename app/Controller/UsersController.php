@@ -9,7 +9,8 @@ App::uses('AppController', 'Controller');
 class UsersController extends AppController
 {
 
-    public function login() {
+    public function login()
+    {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
                 return $this->redirect($this->Auth->redirectUrl());
@@ -19,7 +20,8 @@ class UsersController extends AppController
         }
     }
 
-    public function admin_login() {
+    public function admin_login()
+    {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
                 return $this->redirect($this->Auth->redirectUrl());
@@ -29,7 +31,8 @@ class UsersController extends AppController
         }
     }
 
-    public function admin_logout() {
+    public function admin_logout()
+    {
         return $this->redirect($this->Auth->logout());
     }
 
@@ -61,7 +64,7 @@ class UsersController extends AppController
     public function admin_view($id = null)
     {
         if (!$this->User->exists($id)) {
-            throw new NotFoundException(__('Invalid user'));
+            throw new NotFoundException(__('Dato no válido'));
         }
         $options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
         $this->set('user', $this->User->find('first', $options));
@@ -77,10 +80,10 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $this->User->create();
             if ($this->User->save($this->request->data)) {
-                $this->Session->setFlash(__('The user has been saved.'));
+                $this->Session->setFlash(__('Se han guardado los datos.'));
                 return $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('No se pudo guardar los datos. Por favor, intente de nuevo.'));
             }
         }
     }
@@ -95,14 +98,14 @@ class UsersController extends AppController
     public function admin_edit($id = null)
     {
         if (!$this->User->exists($id)) {
-            throw new NotFoundException(__('Invalid user'));
+            throw new NotFoundException(__('Dato no válido'));
         }
         if ($this->request->is(array('post', 'put'))) {
             if ($this->User->save($this->request->data)) {
-                $this->Session->setFlash(__('The user has been saved.'));
+                $this->Session->setFlash(__('Se han guardado los datos.'));
                 return $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('No se pudo guardar los datos. Por favor, intente de nuevo.'));
             }
         } else {
             $options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
@@ -121,13 +124,13 @@ class UsersController extends AppController
     {
         $this->User->id = $id;
         if (!$this->User->exists()) {
-            throw new NotFoundException(__('Invalid user'));
+            throw new NotFoundException(__('Dato no válido'));
         }
         $this->request->onlyAllow('post', 'delete');
         if ($this->User->delete()) {
-            $this->Session->setFlash(__('The user has been deleted.'));
+            $this->Session->setFlash(__('Se ha eliminado el registro.'));
         } else {
-            $this->Session->setFlash(__('The user could not be deleted. Please, try again.'));
+            $this->Session->setFlash(__('No se pudo eliminar el registro. Por favor, intente de nuevo.'));
         }
         return $this->redirect(array('action' => 'index'));
     }

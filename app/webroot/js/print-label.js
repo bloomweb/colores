@@ -71,9 +71,11 @@ $(function () {
             label.setObjectText('ID_Name', response.barcode.Name.code);
             label.setObjectText('Name_Amount', response.barcode.Size.amount);
             label.setObjectText('Barcode', response.barcode.Barcode.barcode);
-            label.setObjectText('Garanty', $('#LabelTandaBase').val());
+            label.setObjectText('Garanty', $('#LabelTandaBase').val().trim());
+            $('input[type=submit]').removeAttr('disabled');
         } else {
             $('#label-preview-image').css('display', 'none');
+            $('input[type=submit]').attr('disabled', 'disabled');
         }
         updatePreview();
     }
@@ -100,7 +102,34 @@ $(function () {
     });
 
     function printLabel() {
-        label.print(printers[0].name);
+        var inputTandaBase = $('#LabelTandaBase');
+        if(inputTandaBase.val().trim().length == 0) {
+            alert('No has ingresado un valor para "Tanda Base"');
+        } else {
+            inputTandaBase.val(inputTandaBase.val().trim());
+            if(confirm('¿Imprimir esta etiqueta?')) {
+                var response = $.ajax({
+                    'type': 'post',
+                    'dataType': 'json',
+                    'data': {
+                        'name_id': getSelectedColor(),
+                        'size_id': getSelectedSize(),
+                        'tanda_base': inputTandaBase.val()
+                    },
+                    'async': false,
+                    'cache': false,
+                    'url': '/logs/addLog'
+                });
+                response = $.parseJSON(response.responseText);
+                if(response.success) {
+                    label.print(printers[0].name);
+                } else {
+                    alert('Error al tratar de crear el registro de impresión.')
+                }
+            } else {
+                // TODO: ¿Alguna acción aquí?
+            }
+        }
     }
 
 });
