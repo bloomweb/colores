@@ -35,7 +35,7 @@ echo $this->Form->create(
             <fieldset>
                 <legend>Vista Previa</legend>
                 <div class="preview"></div>
-                <img id="label-preview-image" src="" alt="label preview"/>
+                <img id="label-preview-image" src="" alt=""/>
             </fieldset>
         </div>
         <div class="wrapper right">
