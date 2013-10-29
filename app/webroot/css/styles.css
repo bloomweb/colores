@@ -1,4 +1,17 @@
 /* -------------------- GENERIC -------------------- */
+body {
+    background: none repeat scroll 0 0 white;
+}
+fieldset legend, h1, h2, a {
+    color: #393b3c;
+}
+ul#menu * {
+    background-color: #393b3c;
+}
+div#container input[type=submit] {
+    background: #393B3C;
+    text-shadow: none;
+}
 /* Acomodar los mensajes de sistema */
 div#authMessage, div#flashMessage {
     margin: 1% auto;
@@ -41,7 +54,7 @@ form#label-form {
     width: 100%;
 }
 #content.layout-front {
-    background: none repeat scroll 0 0 #AAD4FF;
+    background: none repeat scroll 0 0 white;
 }
 form#label-form div#flashMessage {
     width: 90%;
@@ -101,6 +114,9 @@ form#label-form .barcode, form#label-form .namecode {
 img#label-preview-image {
     display: block;
     margin: auto;
+    background: ThreeDFace;
+    padding: 10px;
+    border-radius: 5px;
 }
 /* Ajustar la ventana de login */
 div.login {
@@ -133,14 +149,14 @@ div.login legend {
     width: 960px;
 }
 .filtros .title {
-    color: #003D4C;
+    color: #393b3c;
     font-weight: bold;
 }
 .filtros td {
     border: 0 none;
 }
 .filtros input[type=submit] {
-    color: #003D4C;
+    color: #FFFFFF;
     font-weight: bold;
     padding: 0;
 }

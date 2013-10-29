@@ -22,7 +22,7 @@ $(function () {
             label = dymo.label.framework.openLabelXml(response.responseText);
         } catch (e) {
             hasFramework = false;
-            alert('Sistema operativo no compatible o no tiene el framework de DYMO instalado.');
+            alert('No tiene el framework de DYMO instalado.');
         }
 
     }
@@ -35,7 +35,7 @@ $(function () {
             }
         } catch (e) {
             hasFramework = false;
-            alert('Sistema operativo no compatible o no tiene el framework de DYMO instalado.');
+            alert('No tiene el framework de DYMO instalado.');
         }
     }
 
@@ -69,7 +69,7 @@ $(function () {
                 $('#label-preview-image').attr('src', "data:image/png;base64," + pngData);
             } catch (e) {
                 hasFramework = false;
-                alert('Sistema operativo no compatible o no tiene el framework de DYMO instalado.');
+                alert('No tiene el framework de DYMO instalado.');
             }
         }
 
@@ -101,7 +101,7 @@ $(function () {
             hasFramework = false;
             $('#label-preview-image').css('display', 'none');
             $('input[type=submit]').attr('disabled', 'disabled');
-            alert('Sistema operativo no compatible o no tiene el framework de DYMO instalado.');
+            alert('No tiene el framework de DYMO instalado.');
         }
         updatePreview();
     }
@@ -158,7 +158,7 @@ $(function () {
                 }
             }
         } else {
-            alert('Sistema operativo no compatible o no tiene el framework de DYMO instalado.');
+            alert('No tiene el framework de DYMO instalado.');
         }
     }
 
