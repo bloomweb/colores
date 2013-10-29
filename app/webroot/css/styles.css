@@ -158,5 +158,5 @@ div.login legend {
 .filtros input[type=submit] {
     color: #FFFFFF;
     font-weight: bold;
-    padding: 0;
+    padding: 0 5px;
 }
