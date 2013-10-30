@@ -1,11 +1,11 @@
 <?php
 App::uses('AppModel', 'Model');
 /**
- * Label Model
+ * Backup Model
  *
- * @property Label $Label
+ * @property Backup $Backup
  */
-class Label extends AppModel
+class Backup extends AppModel
 {
 
     public $useTable = false;
