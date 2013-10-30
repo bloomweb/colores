@@ -17,19 +17,19 @@ class BackupsController extends AppController
 
     }
 
-	public function admin_importColores() {
+	public function admin_importNames() {
 		if($this->request->is('post')) {
 			$this->process_import($this->request->data, 'colores');
 		}
 	}
 
-	public function admin_importTamaños() {
+	public function admin_importSizes() {
 		if($this->request->is('post')) {
 			$this->process_import($this->request->data, 'tamaños');
 		}
 	}
 
-	public function admin_importCodigosDeBarras() {
+	public function admin_importBarcodes() {
 		if($this->request->is('post')) {
 			$this->process_import($this->request->data, 'codigos');
 		}

@@ -26,13 +26,13 @@
 		    <a>Importar CSV</a>
 		    <ul>
 			    <li>
-				    <a href="/admin/backups/importColores">Colores</a>
+				    <a href="/admin/backups/importNames">Colores</a>
 			    </li>
 			    <li>
-				    <a href="/admin/backups/importTamaños">Tamaños</a>
+				    <a href="/admin/backups/importSizes">Tamaños</a>
 			    </li>
 			    <li>
-				    <a href="/admin/backups/importCodigosDeBarras">Códigos De Barras</a>
+				    <a href="/admin/backups/importBarcodes">Códigos De Barras</a>
 			    </li>
 		    </ul>
 	    </li>
