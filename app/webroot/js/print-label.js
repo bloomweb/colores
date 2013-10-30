@@ -32,8 +32,18 @@ $(function () {
             printers = dymo.label.framework.getPrinters();
             if (printers.length == 0) {
                 alert("No se detecta una impresora DYMO en su equipo.");
+            } else {
+                try {
+                    var printerSelect = $('#LabelImpresora');
+                    printerSelect.empty();
+                    for (var i = 0; i < printers.length; i++) {
+                        printerSelect.append('<option value="' + printers[i].name + '">' + printers[i].name + '</option>');
+                    }
+                } catch (e2) {
+                    alert(e2.message);
+                }
             }
-        } catch (e) {
+        } catch (e1) {
             hasFramework = false;
             alert('No tiene el framework de DYMO instalado.');
         }
@@ -63,7 +73,7 @@ $(function () {
 
         var pngData = {};
 
-        if(hasFramework) {
+        if (hasFramework) {
             try {
                 pngData = label.render();
                 $('#label-preview-image').attr('src', "data:image/png;base64," + pngData);
@@ -85,7 +95,7 @@ $(function () {
         response = $.parseJSON(response.responseText);
         $('.preview').load('/labels/getPreview/' + getSelectedColor() + '/' + getSelectedSize());
         try {
-            if(response.success) {
+            if (response.success) {
                 $('#label-preview-image').css('display', 'block');
                 label.setObjectText('Name', response.barcode.Name.name);
                 label.setObjectText('ID_Name', response.barcode.Name.code);
@@ -114,27 +124,29 @@ $(function () {
         loadPreview();
     });
 
-    setInterval(function() { checkTextValue(); }, 250);
+    setInterval(function () {
+        checkTextValue();
+    }, 250);
 
     function checkTextValue() {
         label.setObjectText('Garanty', $('#LabelTandaBase').val());
         updatePreview();
     }
 
-    $('#label-form').submit(function(e) {
+    $('#label-form').submit(function (e) {
         e.preventDefault();
         printLabel();
         return false;
     });
 
     function printLabel() {
-        if(hasFramework) {
+        if (hasFramework) {
             var inputTandaBase = $('#LabelTandaBase');
-            if(inputTandaBase.val().trim().length == 0) {
+            if (inputTandaBase.val().trim().length == 0) {
                 alert('No has ingresado un valor para "Tanda Base"');
             } else {
                 inputTandaBase.val(inputTandaBase.val().trim());
-                if(confirm('¿Imprimir esta etiqueta?')) {
+                if (confirm('¿Imprimir esta etiqueta?')) {
                     var response = $.ajax({
                         'type': 'post',
                         'dataType': 'json',
@@ -148,8 +160,8 @@ $(function () {
                         'url': '/logs/addLog'
                     });
                     response = $.parseJSON(response.responseText);
-                    if(response.success) {
-                        label.print(printers[0].name);
+                    if (response.success) {
+                        label.print($('#LabelImpresora').val());
                     } else {
                         alert('Error al tratar de crear el registro de impresión.')
                     }

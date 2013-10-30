@@ -45,6 +45,9 @@ echo $this->Form->create(
             </fieldset>
         </div>
     </div>
+    <div class="wrapper printers">
+        <?php echo $this->Form->input('impresora', array('label' => 'Seleccione una impresora', 'type' => 'select', 'empty' => '- Ninguna -')); ?>
+    </div>
     <div class="wrapper submit">
         <?php echo $this->Form->submit('Imprimir'); ?>
     </div>

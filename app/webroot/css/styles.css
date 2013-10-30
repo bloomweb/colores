@@ -1,23 +1,30 @@
 /* -------------------- GENERIC -------------------- */
 body {
     background: none repeat scroll 0 0 white;
+    margin: 0 auto;
+    max-width: 960px;
 }
+
 fieldset legend, h1, h2, a {
     color: #393b3c;
 }
+
 ul#menu * {
     background-color: #393b3c;
 }
+
 div#container input[type=submit] {
     background: #393B3C;
     text-shadow: none;
 }
+
 /* Acomodar los mensajes de sistema */
 div#authMessage, div#flashMessage {
     margin: 1% auto;
     text-align: center;
     width: 720px;
 }
+
 /* Paginador botones first y last */
 .paging .first {
     border-radius: 4px 0 0 4px;
@@ -25,10 +32,12 @@ div#authMessage, div#flashMessage {
     border-width: 1px;
     margin-right: -3px;
 }
+
 .paging .last {
     border-radius: 0 4px 4px 0;
     margin-left: -3px;
 }
+
 /* ocultar los menús y enlaces de acciones que se generan por defecto */
 div.actions {
     display: none;
@@ -36,11 +45,21 @@ div.actions {
     padding: 0;
     width: 0;
 }
+
 /* Acomodar el menú a la derecha */
 ul#menu {
     float: right;
     width: auto;
 }
+
+/* Acomodar el tamaño del menu y textos */
+.sf-menu > li > a, .sf-menu a {
+    padding: 5px;
+    font-size: 12px;
+    line-height: 14px;
+    font-weight: bold;
+}
+
 /* ajustar el tamaño del contenido para acomodar con el espacio que ha quedado en blanco */
 div.form, div.index, div.view {
     border-left: 0 none;
@@ -48,69 +67,95 @@ div.form, div.index, div.view {
     padding: 5px 0;
     width: 100%;
 }
+
 /* -------------------- FRONT -------------------- */
 /* Formulario para imprimir la etiqueta */
 form#label-form {
     width: 100%;
 }
+
 #content.layout-front {
     background: none repeat scroll 0 0 white;
 }
+
 form#label-form div#flashMessage {
     width: 90%;
 }
+
 form#label-form label {
     float: left;
     padding: 4px 0;
+    font-size: 12px;
+    line-height: 12px;
+    font-weight: bold;
 }
+
 form#label-form input, form#label-form select {
     margin-left: 10px;
     max-width: 70%;
     text-align: center;
+    font-size: 12px;
 }
+
 form#label-form .submit input {
     margin-left: 0;
     max-width: 70%;
     text-align: center;
 }
+
 form#label-form .input.text {
     margin: 0 auto;
     width: 90%;
 }
+
 form#label-form fieldset {
     border: 1px solid #000000;
 }
+
 .wrapper.height1 fieldset {
     min-height: 80px;
 }
+
 .wrapper.height2 fieldset {
     min-height: 160px;
 }
+
 .wrapper.image, .wrapper.submit {
     text-align: center;
     width: 100%;
 }
+
 .wrapper {
     margin-left: auto;
     margin-right: auto;
-    width: 90%;
+    width: 100%;
 }
+
 .wrapper.left, .wrapper.right {
     display: inline-block;
     width: 48%;
 }
+
 .wrapper.right {
     float: right;
 }
+
+.wrapper.printers div {
+    margin: 0 auto;
+    width: 384px;
+}
+
 form#label-form .barcode, form#label-form .namecode {
     border: 0 none;
     display: inline-block;
     min-height: 78px;
     width: 48%;
 }
+
 .namecode {
     float: right;
 }
+
 img#label-preview-image {
     display: block;
     margin: auto;
@@ -118,29 +163,39 @@ img#label-preview-image {
     padding: 10px;
     border-radius: 5px;
 }
+
 /* Ajustar la ventana de login */
 div.login {
     margin-left: auto;
     margin-right: auto;
     width: 240px;
 }
+
 div.login form * {
     margin: 6px auto 0;
     text-align: center;
 }
+
 div.login fieldset {
     position: relative;
 }
+
 div.login legend {
     left: 12%;
     position: absolute;
     top: -15px;
 }
+
 /* -------------------- BACK -------------------- */
+#content.layout-back {
+    padding: 10px 0 40px;
+}
+
 .filtros * {
     font-size: 12px;
     line-height: 24px;
 }
+
 .filtros {
     background-color: threedface;
     border-radius: 5px 5px 5px 5px;
@@ -148,13 +203,16 @@ div.login legend {
     padding: 0;
     width: 960px;
 }
+
 .filtros .title {
     color: #393b3c;
     font-weight: bold;
 }
+
 .filtros td {
     border: 0 none;
 }
+
 .filtros input[type=submit] {
     color: #FFFFFF;
     font-weight: bold;
