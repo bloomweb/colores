@@ -10,13 +10,21 @@ class Backup extends AppModel
 
     public $useTable = false;
 
-	public function importColores($path) {
+	public function importColores($path, $separator) {
+
+		// Verificar codificación
+		$data = file_get_contents($path);
+		$old_encoding = mb_detect_encoding($data, 'auto');
+		if($old_encoding) {
+			$data = mb_convert_encoding($data, 'UTF-8', $old_encoding);
+			$data_result = file_put_contents($path, $data);
+		}
 
 		// Abrir el archivo
 		$handle = fopen($path, "r");
 
 		// Leer la primera fila como cabeceras
-		$headers = fgetcsv($handle);
+		$headers = fgetcsv($handle, 0, $separator);
 
 		if(count($headers) != 2) return array('success' => false, 'message' => 'El archivo contiene una cantidad distinta de columnas a las requeridas.');
 		if($headers[0] != 'ID_Name' || $headers[1] != 'Name') return array('success' => false, 'message' => 'No se reconocen las columnas requeridas.');
@@ -24,7 +32,7 @@ class Backup extends AppModel
 		$names = array();
 
 		// Procesar el archivo
-		for (; ($row = fgetcsv($handle)) !== FALSE;) {
+		for (; ($row = fgetcsv($handle, 0, $separator)) !== FALSE;) {
 
 			$name = array('code' => '', 'name' => '');
 
@@ -37,7 +45,9 @@ class Backup extends AppModel
 				}
 			}
 
-			$names[]['Name'] = $name;
+			if((strlen($name['code']) > 0) && (strlen($name['name']) > 0)) {
+				$names[]['Name'] = $name;
+			}
 
 		}
 
@@ -56,6 +66,8 @@ class Backup extends AppModel
 			}
 		}
 
+		$uno = 1;
+
 		if(!empty($names)) {
 			if($Name->saveAll($names)) {
 				$result['success'] = true;
@@ -71,13 +83,21 @@ class Backup extends AppModel
 
 	}
 
-	public function importTamaños($path) {
+	public function importTamaños($path, $separator) {
+
+		// Verificar codificación
+		$data = file_get_contents($path);
+		$old_encoding = mb_detect_encoding($data, 'auto');
+		if($old_encoding) {
+			$data = mb_convert_encoding($data, 'UTF-8', $old_encoding);
+			$data_result = file_put_contents($path, $data);
+		}
 
 		// Abrir el archivo
 		$handle = fopen($path, "r");
 
 		// Leer la primera fila como cabeceras
-		$headers = fgetcsv($handle);
+		$headers = fgetcsv($handle, 0, $separator);
 
 		if(count($headers) != 2) return array('success' => false, 'message' => 'El archivo contiene una cantidad distinta de columnas a las requeridas.');
 		if($headers[0] != 'ID_Amount' || $headers[1] != 'Name_Amount') return array('success' => false, 'message' => 'No se reconocen las columnas requeridas.');
@@ -85,7 +105,7 @@ class Backup extends AppModel
 		$sizes = array();
 
 		// Procesar el archivo
-		for (; ($row = fgetcsv($handle)) !== FALSE;) {
+		for (; ($row = fgetcsv($handle, 0, $separator)) !== FALSE;) {
 
 			$size = array('amount' => '');
 
@@ -98,7 +118,9 @@ class Backup extends AppModel
 				}
 			}
 
-			$sizes[]['Size'] = $size;
+			if(strlen($size['amount']) > 0) {
+				$sizes[]['Size'] = $size;
+			}
 
 		}
 
@@ -132,13 +154,21 @@ class Backup extends AppModel
 
 	}
 
-	public function importCodigosDeBarras($path) {
+	public function importCodigosDeBarras($path, $separator) {
+
+		// Verificar codificación
+		$data = file_get_contents($path);
+		$old_encoding = mb_detect_encoding($data, 'auto');
+		if($old_encoding) {
+			$data = mb_convert_encoding($data, 'UTF-8', $old_encoding);
+			$data_result = file_put_contents($path, $data);
+		}
 
 		// Abrir el archivo
 		$handle = fopen($path, "r");
 
 		// Leer la primera fila como cabeceras
-		$headers = fgetcsv($handle);
+		$headers = fgetcsv($handle, 0, $separator);
 
 		if(count($headers) != 4) return array('success' => false, 'message' => 'El archivo contiene una cantidad distinta de columnas a las requeridas.');
 		if($headers[0] != 'Key_Barcode' || $headers[1] != 'Barcode' || $headers[2] != 'ID_Amount' || $headers[3] != 'ID_Name') return array('success' => false, 'message' => 'No se reconocen las columnas requeridas.');
@@ -150,7 +180,7 @@ class Backup extends AppModel
 		$Name = ClassRegistry::init('Name');
 
 		// Procesar el archivo
-		for (; ($row = fgetcsv($handle)) !== FALSE;) {
+		for (; ($row = fgetcsv($handle, 0, $separator)) !== FALSE;) {
 
 			$barcode = array('size_id' => '', 'name_id' => '', 'barcode' => '');
 
@@ -166,17 +196,19 @@ class Backup extends AppModel
 					case 2:
 						// Obtener el ID registrado para el tamaño
 						$size = $Size->find('first', array('conditions' => array('Size.amount' => trim($row[$key]))));
-						$barcode['size_id'] = $size['Size']['id'];
+						if($size) $barcode['size_id'] = $size['Size']['id'];
 						break;
 					case 3:
 						// Obtener el ID registrado para el color
 						$name = $Name->find('first', array('conditions' => array('Name.code' => trim($row[$key]))));
-						$barcode['name_id'] = $name['Name']['id'];
+						if($name) $barcode['name_id'] = $name['Name']['id'];
 						break;
 				}
 			}
 
-			$barcodes[]['Barcode'] = $barcode;
+			if((strlen($barcode['barcode']) > 0) && (strlen($barcode['size_id']) > 0) && (strlen($barcode['name_id']) > 0)) {
+				$barcodes[]['Barcode'] = $barcode;
+			}
 
 			set_time_limit(60);
 

@@ -218,3 +218,19 @@ div.login legend {
     font-weight: bold;
     padding: 0 5px;
 }
+.backups.form.csv label {
+    display: inline-block;
+    float: left;
+    font-size: 24px;
+    line-height: 48px;
+}
+.backups.form.csv input {
+    display: inline-block;
+    float: none;
+    margin: 0 30px;
+    max-width: 50%;
+}
+#BackupSeparador {
+    max-width: 20px;
+    text-align: center;
+}

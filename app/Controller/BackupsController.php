@@ -41,17 +41,18 @@ class BackupsController extends AppController
 			$filename = $data['Backup']['file']['name'];
 			$tmp_name = $data['Backup']['file']['tmp_name'];
 			$file_dest = $path . DS .$filename;
+			$separator = $data['Backup']['separador'];
 			if(move_uploaded_file($tmp_name, $file_dest)) {
 				$result = null;
 				switch($type) {
 					case 'colores':
-						$result = $this->Backup->importColores($file_dest);
+						$result = $this->Backup->importColores($file_dest, $separator);
 						break;
 					case 'tamaños':
-						$result = $this->Backup->importTamaños($file_dest);
+						$result = $this->Backup->importTamaños($file_dest, $separator);
 						break;
 					case 'codigos':
-						$result = $this->Backup->importCodigosDeBarras($file_dest);
+						$result = $this->Backup->importCodigosDeBarras($file_dest, $separator);
 						break;
 				}
 				if($result['success']) {
