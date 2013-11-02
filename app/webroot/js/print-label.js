@@ -76,8 +76,6 @@ $(function () {
      * Manejo de la sección de vista previa
      */
 
-    loadPreview();
-
     function getSelectedSize() {
         selectedSize = $('#LabelTamaño').val();
     }
@@ -88,7 +86,9 @@ $(function () {
             'cache': false,
             'async': false,
             'dataType': 'json',
-            'data': $('#LabelName').val()
+            'data': {
+                'name': $('#LabelName').val()
+            }
         });
         response = $.parseJSON(response.responseText);
         if(response.success) {
@@ -155,22 +155,15 @@ $(function () {
         }
     }
 
-    /*$('#LabelPintura').change(function () {
-        loadPreview();
-    });*/
-
-    $('#LabelTamaño').change(function () {
-        loadPreview();
-    });
-
     setInterval(function () {
-        checkTextValue();
         getSelectedColor();
-    }, 1000);
+        getSelectedSize();
+        checkTextValue();
+        loadPreview();
+    }, 750);
 
     function checkTextValue() {
         label.setObjectText('Garanty', $('#LabelTandaBase').val());
-        updatePreview();
     }
 
     $('#label-form').submit(function (e) {
