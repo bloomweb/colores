@@ -69,7 +69,7 @@ class Name extends AppModel {
 		'Barcode' => array(
 			'className' => 'Barcode',
 			'foreignKey' => 'name_id',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',

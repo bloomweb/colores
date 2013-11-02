@@ -1,5 +1,4 @@
 $(function () {
-
     /**
      * Manejo de la impresora
      */
@@ -10,16 +9,91 @@ $(function () {
         printers = null,
         hasFramework = true,
         showPreview = false,
-        selectedName = null,
-        selectedSize = null;
+        selectedNameId = null,
+        selectedSizeId = null,
+        name = null,
+        previousName = null,
+        previousSelectedSizeId = null,
+        garanty = null,
+        previousGaranty = null,
+        updatedInfo = false,
+        labelForm = $('#label-form'),
+        inputTamaño = $('#LabelTamaño'),
+        inputColor = $('#LabelName'),
+        inputGaranty = $('#LabelTandaBase'),
+        linkActualizarVP = $('.update-preview');
+
+    linkActualizarVP.click(function() {
+        if(inputColor.val().length == 0) {
+            alert('Seleccione un color para generar la vista previa');
+        }
+    });
+
+    labelForm.submit(function (e) {
+        e.preventDefault();
+        printLabel();
+        return false;
+    });
+
+    inputTamaño.change(function() {
+        verificarTamaño();
+        verifyIfUpdated();
+    });
+
+    inputColor.change(function() {
+        verificarColor();
+        verifyIfUpdated();
+    });
+
+    inputGaranty.change(function() {
+        verificarGaranty();
+        verifyIfUpdated();
+    });
 
     cargarColores();
     verificarImpresora();
+    verificarColor();
+    verificarTamaño();
+    verificarGaranty();
     loadLabel();
+    verifyIfUpdated();
+
+    function verifyIfUpdated() {
+        if(updatedInfo) {
+            getSelectedColor();
+            loadPreview();
+            updatedInfo = false;
+        }
+    }
+
+    function verificarGaranty() {
+        garanty = inputGaranty.val();
+        if(garanty != previousGaranty) {
+            updatedInfo = true;
+            previousGaranty = garanty;
+        }
+    }
+
+    function verificarColor() {
+        name = inputColor.val();
+        if(name != previousName) {
+            updatedInfo = true;
+            previousName = name;
+        }
+    }
+
+    function verificarTamaño() {
+        getSelectedSize();
+        if(selectedSizeId != previousSelectedSizeId) {
+            updatedInfo = true;
+            previousSelectedSizeId = selectedSizeId;
+        }
+    }
 
     function cargarColores() {
         var response = $.ajax({
             'url': '/names/getOptions/1',
+            'type': 'post',
             'dataType': 'json',
             'async': false,
             'cache': false
@@ -28,7 +102,7 @@ $(function () {
         $.each(response, function(id, name) {
             colores.push(name);
         });
-        $('#LabelName').autocomplete({
+        inputColor.autocomplete({
             source: colores
         });
     }
@@ -36,6 +110,7 @@ $(function () {
     function loadLabel() {
         var response = $.ajax({
             'url': '/labels/getLabelFileXMLContent',
+            'type': 'post',
             'cache': false,
             'async': false,
             'dataType': 'xml'
@@ -77,26 +152,27 @@ $(function () {
      */
 
     function getSelectedSize() {
-        selectedSize = $('#LabelTamaño').val();
+        selectedSizeId = inputTamaño.val();
     }
 
     function getSelectedColor() {
         var response = $.ajax({
             'url': '/names/getNameID',
+            'type': 'post',
             'cache': false,
             'async': false,
             'dataType': 'json',
             'data': {
-                'name': $('#LabelName').val()
+                'name': name
             }
         });
         response = $.parseJSON(response.responseText);
         if(response.success) {
             showPreview = true;
-            selectedName = response.name_id;
+            selectedNameId = response.name_id;
         } else {
             showPreview = false;
-            selectedName = null;
+            selectedNameId = null;
         }
     }
 
@@ -106,87 +182,76 @@ $(function () {
      * if you want previews in IE 6 & 7 you have to do it on the server side
      */
     function updatePreview() {
-        if (!label) return;
+        if (label) {
+            var pngData = {};
 
-        var pngData = {};
-
-        if (hasFramework) {
-            try {
-                pngData = label.render();
-                $('#label-preview-image').attr('src', "data:image/png;base64," + pngData);
-            } catch (e) {
-                hasFramework = false;
-                alert('No tiene el framework de DYMO instalado.');
+            if (hasFramework) {
+                try {
+                    pngData = label.render();
+                    $('#label-preview-image').attr('src', "data:image/png;base64," + pngData);
+                } catch (e) {
+                    hasFramework = false;
+                    alert('No tiene el framework de DYMO instalado.');
+                }
             }
         }
-
     }
 
     function loadPreview() {
         if(showPreview) {
-            var response = $.ajax({
-                'url': '/labels/getPreviewAjax/' + selectedName + '/' + selectedSize,
-                'cache': false,
-                'async': false,
-                'dataType': 'json'
-            });
-            response = $.parseJSON(response.responseText);
-            $('.preview').load('/labels/getPreview/' + selectedName + '/' + selectedSize);
             try {
-                if (response.success) {
-                    $('#label-preview-image').css('display', 'block');
-                    label.setObjectText('Name', response.barcode.Name.name);
-                    label.setObjectText('ID_Name', response.barcode.Name.code);
-                    label.setObjectText('Name_Amount', response.barcode.Size.amount);
-                    label.setObjectText('Barcode', response.barcode.Barcode.barcode);
-                    label.setObjectText('Garanty', $('#LabelTandaBase').val().trim());
-                    $('input[type=submit]').removeAttr('disabled');
-                } else {
+                var response = $.ajax({
+                    'url': '/labels/getPreviewAjax/' + selectedNameId + '/' + selectedSizeId,
+                    'type': 'post',
+                    'cache': false,
+                    'async': false,
+                    'dataType': 'json'
+                });
+                response = $.parseJSON(response.responseText);
+                try {
+                    if (response.success) {
+
+                        label.setObjectText('Name', response.barcode.Name.name);
+                        label.setObjectText('ID_Name', response.barcode.Name.code);
+                        label.setObjectText('Name_Amount', response.barcode.Size.amount);
+                        label.setObjectText('Barcode', response.barcode.Barcode.barcode);
+                        label.setObjectText('Garanty', inputGaranty.val().trim());
+
+                        $('#label-preview-image').css('display', 'block');
+                        $('input[type=submit]').removeAttr('disabled');
+
+                        $('.preview').load('/labels/getPreview/' + selectedNameId + '/' + selectedSizeId);
+                        updatePreview();
+
+                    } else {
+                        $('#label-preview-image').css('display', 'none');
+                        $('input[type=submit]').attr('disabled', 'disabled');
+                    }
+                } catch (e2) {
+                    hasFramework = false;
                     $('#label-preview-image').css('display', 'none');
                     $('input[type=submit]').attr('disabled', 'disabled');
+                    alert('No tiene el framework de DYMO instalado.');
                 }
-            } catch (e) {
-                hasFramework = false;
-                $('#label-preview-image').css('display', 'none');
-                $('input[type=submit]').attr('disabled', 'disabled');
-                alert('No tiene el framework de DYMO instalado.');
+            } catch (e1) {
             }
-            updatePreview();
         }
     }
 
-    setInterval(function () {
-        getSelectedColor();
-        getSelectedSize();
-        checkTextValue();
-        loadPreview();
-    }, 750);
-
-    function checkTextValue() {
-        label.setObjectText('Garanty', $('#LabelTandaBase').val());
-    }
-
-    $('#label-form').submit(function (e) {
-        e.preventDefault();
-        printLabel();
-        return false;
-    });
-
     function printLabel() {
         if (hasFramework) {
-            var inputTandaBase = $('#LabelTandaBase');
-            if (inputTandaBase.val().trim().length == 0) {
+            if (inputGaranty.val().trim().length == 0) {
                 alert('No has ingresado un valor para "Tanda Base"');
             } else {
-                inputTandaBase.val(inputTandaBase.val().trim());
+                inputGaranty.val(inputGaranty.val().trim());
                 if (confirm('¿Imprimir esta etiqueta?')) {
                     var response = $.ajax({
                         'type': 'post',
                         'dataType': 'json',
                         'data': {
-                            'name_id': selectedName,
-                            'size_id': selectedSize,
-                            'tanda_base': inputTandaBase.val()
+                            'name_id': selectedNameId,
+                            'size_id': selectedSizeId,
+                            'tanda_base': inputGaranty.val()
                         },
                         'async': false,
                         'cache': false,

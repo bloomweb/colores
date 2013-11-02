@@ -17,7 +17,7 @@ echo $this->Form->create(
                 <?php
                 //$options = $this->requestAction('/names/getOptions');
                 //echo $this->Form->input('pintura', array('type' => 'select', 'options' => $options));
-                echo $this->Form->input('name', array('type' => 'text', 'label' => 'Pintura', 'value' => 1));
+                echo $this->Form->input('name', array('type' => 'text', 'label' => 'Pintura', 'placeholder' => 'Ingrese el nombre del color que busca'));
                 echo $this->Form->input('pintura', array('type' => 'hidden'));
                 ?>
             </fieldset>
@@ -44,6 +44,9 @@ echo $this->Form->create(
             <fieldset>
                 <legend>Digite Aquí</legend>
                 <?php echo $this->Form->input('tanda_base'); ?>
+                <div class="actions" style="display: block; margin: 30px auto; width: 180px;">
+                    <a class="update-preview">Actualizar Vista Previa</a>
+                </div>
             </fieldset>
         </div>
     </div>

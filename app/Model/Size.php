@@ -26,7 +26,7 @@ class Size extends AppModel {
 		'Barcode' => array(
 			'className' => 'Barcode',
 			'foreignKey' => 'size_id',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',

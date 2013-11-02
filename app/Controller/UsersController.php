@@ -13,7 +13,7 @@ class UsersController extends AppController
     {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
-                return $this->redirect($this->Auth->redirectUrl());
+                $this->redirect('/');
             } else {
                 $this->Session->setFlash(__('Usuario o contraseña incorrectos'), 'default', array(), 'auth');
             }
@@ -24,7 +24,7 @@ class UsersController extends AppController
     {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
-                return $this->redirect($this->Auth->redirectUrl());
+                $this->redirect('/admin/names');
             } else {
                 $this->Session->setFlash(__('Usuario o contraseña incorrectos'), 'default', array(), 'auth');
             }
@@ -33,7 +33,8 @@ class UsersController extends AppController
 
     public function admin_logout()
     {
-        return $this->redirect($this->Auth->logout());
+        $this->Session->setFlash(__('Ha cerrado la sesión'), 'default', array(), 'auth');
+        $this->redirect($this->Auth->logout());
     }
 
     /**

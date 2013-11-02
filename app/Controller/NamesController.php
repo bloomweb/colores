@@ -11,7 +11,7 @@ class NamesController extends AppController
 
     public function getNameID() {
         $this->autoRender=false;
-        $name = $this->Name->findByName($_GET['name']);
+        $name = $this->Name->findByName($_POST['name']);
         if($name) {
             echo json_encode(array('success' => true, 'name_id' => $name['Name']['id']));
         } else {

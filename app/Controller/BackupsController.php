@@ -36,7 +36,7 @@ class BackupsController extends AppController
 	}
 
 	private function process_import($data, $type) {
-		if(!$data['Backup']['file']['error'] && $data['Backup']['file']['type'] == 'text/csv') {
+        if(!$data['Backup']['file']['error']) {
 			$path = WWW_ROOT . 'files' . DS . 'uploads';
 			$filename = $data['Backup']['file']['name'];
 			$tmp_name = $data['Backup']['file']['tmp_name'];
