@@ -15,8 +15,10 @@ echo $this->Form->create(
             <fieldset>
                 <legend>Color</legend>
                 <?php
-                $options = $this->requestAction('/names/getOptions');
-                echo $this->Form->input('pintura', array('type' => 'select', 'options' => $options));
+                //$options = $this->requestAction('/names/getOptions');
+                //echo $this->Form->input('pintura', array('type' => 'select', 'options' => $options));
+                echo $this->Form->input('name', array('type' => 'text', 'label' => 'Pintura', 'value' => 1));
+                echo $this->Form->input('pintura', array('type' => 'hidden'));
                 ?>
             </fieldset>
         </div>

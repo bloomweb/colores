@@ -9,13 +9,25 @@ App::uses('AppController', 'Controller');
 class NamesController extends AppController
 {
 
-    public function beforeFilter() {
-        parent::beforeFilter();
-        $this->Auth->allow('getOptions');
+    public function getNameID() {
+        $this->autoRender=false;
+        $name = $this->Name->findByName($_GET['name']);
+        if($name) {
+            echo json_encode(array('success' => true, 'name_id' => $name['Name']['id']));
+        } else {
+            echo json_encode(array('success' => false));
+        }
+        exit(0);
     }
 
-    public function getOptions() {
-        return $this->Name->find('list');
+    public function getOptions($ajax = 0) {
+        if(!$ajax) {
+            return $this->Name->find('list');
+        } else {
+            $this->autoRender=false;
+            echo json_encode($this->Name->find('list'));
+            exit(0);
+        }
     }
 
     /**

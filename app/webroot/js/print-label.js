@@ -5,10 +5,33 @@ $(function () {
      */
 
     // stores loaded label and printer info
-    var label = {}, printers = {}, hasFramework = true;
+    var colores = [],
+        label = null,
+        printers = null,
+        hasFramework = true,
+        showPreview = false,
+        selectedName = null,
+        selectedSize = null;
 
+    cargarColores();
     verificarImpresora();
     loadLabel();
+
+    function cargarColores() {
+        var response = $.ajax({
+            'url': '/names/getOptions/1',
+            'dataType': 'json',
+            'async': false,
+            'cache': false
+        });
+        response = $.parseJSON(response.responseText);
+        $.each(response, function(id, name) {
+            colores.push(name);
+        });
+        $('#LabelName').autocomplete({
+            source: colores
+        });
+    }
 
     function loadLabel() {
         var response = $.ajax({
@@ -56,11 +79,25 @@ $(function () {
     loadPreview();
 
     function getSelectedSize() {
-        return $('#LabelTamaño').val();
+        selectedSize = $('#LabelTamaño').val();
     }
 
     function getSelectedColor() {
-        return $('#LabelPintura').val();
+        var response = $.ajax({
+            'url': '/names/getNameID',
+            'cache': false,
+            'async': false,
+            'dataType': 'json',
+            'data': $('#LabelName').val()
+        });
+        response = $.parseJSON(response.responseText);
+        if(response.success) {
+            showPreview = true;
+            selectedName = response.name_id;
+        } else {
+            showPreview = false;
+            selectedName = null;
+        }
     }
 
     /**
@@ -86,39 +123,41 @@ $(function () {
     }
 
     function loadPreview() {
-        var response = $.ajax({
-            'url': '/labels/getPreviewAjax/' + getSelectedColor() + '/' + getSelectedSize(),
-            'cache': false,
-            'async': false,
-            'dataType': 'json'
-        });
-        response = $.parseJSON(response.responseText);
-        $('.preview').load('/labels/getPreview/' + getSelectedColor() + '/' + getSelectedSize());
-        try {
-            if (response.success) {
-                $('#label-preview-image').css('display', 'block');
-                label.setObjectText('Name', response.barcode.Name.name);
-                label.setObjectText('ID_Name', response.barcode.Name.code);
-                label.setObjectText('Name_Amount', response.barcode.Size.amount);
-                label.setObjectText('Barcode', response.barcode.Barcode.barcode);
-                label.setObjectText('Garanty', $('#LabelTandaBase').val().trim());
-                $('input[type=submit]').removeAttr('disabled');
-            } else {
+        if(showPreview) {
+            var response = $.ajax({
+                'url': '/labels/getPreviewAjax/' + selectedName + '/' + selectedSize,
+                'cache': false,
+                'async': false,
+                'dataType': 'json'
+            });
+            response = $.parseJSON(response.responseText);
+            $('.preview').load('/labels/getPreview/' + selectedName + '/' + selectedSize);
+            try {
+                if (response.success) {
+                    $('#label-preview-image').css('display', 'block');
+                    label.setObjectText('Name', response.barcode.Name.name);
+                    label.setObjectText('ID_Name', response.barcode.Name.code);
+                    label.setObjectText('Name_Amount', response.barcode.Size.amount);
+                    label.setObjectText('Barcode', response.barcode.Barcode.barcode);
+                    label.setObjectText('Garanty', $('#LabelTandaBase').val().trim());
+                    $('input[type=submit]').removeAttr('disabled');
+                } else {
+                    $('#label-preview-image').css('display', 'none');
+                    $('input[type=submit]').attr('disabled', 'disabled');
+                }
+            } catch (e) {
+                hasFramework = false;
                 $('#label-preview-image').css('display', 'none');
                 $('input[type=submit]').attr('disabled', 'disabled');
+                alert('No tiene el framework de DYMO instalado.');
             }
-        } catch (e) {
-            hasFramework = false;
-            $('#label-preview-image').css('display', 'none');
-            $('input[type=submit]').attr('disabled', 'disabled');
-            alert('No tiene el framework de DYMO instalado.');
+            updatePreview();
         }
-        updatePreview();
     }
 
-    $('#LabelPintura').change(function () {
+    /*$('#LabelPintura').change(function () {
         loadPreview();
-    });
+    });*/
 
     $('#LabelTamaño').change(function () {
         loadPreview();
@@ -126,7 +165,8 @@ $(function () {
 
     setInterval(function () {
         checkTextValue();
-    }, 250);
+        getSelectedColor();
+    }, 1000);
 
     function checkTextValue() {
         label.setObjectText('Garanty', $('#LabelTandaBase').val());
@@ -151,8 +191,8 @@ $(function () {
                         'type': 'post',
                         'dataType': 'json',
                         'data': {
-                            'name_id': getSelectedColor(),
-                            'size_id': getSelectedSize(),
+                            'name_id': selectedName,
+                            'size_id': selectedSize,
                             'tanda_base': inputTandaBase.val()
                         },
                         'async': false,

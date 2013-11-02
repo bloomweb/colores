@@ -36,6 +36,13 @@
     echo $this->Html->css('superfish-navbar');
     echo $this->Html->css('superfish-vertical');
     echo $this->Html->css('megafish');
+
+    if (Configure::read('debug')) {
+        echo $this->Html->css('jquery-ui-1.10.3.custom');
+    } else {
+        echo $this->Html->css('jquery-ui-1.10.3.custom.min');
+    }
+
     echo $this->Html->css('styles');
 
     // scripts
@@ -46,6 +53,12 @@
     } else {
         echo $this->Html->script('jquery-1.10.2.min');
         //echo $this->Html->script('jquery-migrate-1.2.1.min');
+    }
+
+    if (Configure::read('debug')) {
+        echo $this->Html->script('jquery-ui-1.10.3.custom');
+    } else {
+        echo $this->Html->script('jquery-ui-1.10.3.custom.min');
     }
 
     echo $this->Html->script('hoverIntent');
