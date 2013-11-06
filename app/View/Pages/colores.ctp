@@ -7,22 +7,29 @@ echo $this->Form->create(
     )
 );
 ?>
-    <div class="wrapper image">
-        <?php echo $this->Html->image('colores_pintuco.jpg'); ?>
+    <div class="wrapper height2">
+        <div class="wrapper left">
+            <?php echo $this->Html->image('colores_pintuco.jpg', array('class' => 'logo')); ?>
+        </div>
+        <div class="wrapper right">
+            <fieldset>
+                <legend>Vista Previa</legend>
+                <div class="preview"></div>
+                <img id="label-preview-image" src="" alt=""/>
+            </fieldset>
+        </div>
     </div>
-    <div class="wrapper height1">
+    <div class="wrapper inputs height1">
         <div class="wrapper left">
             <fieldset>
                 <legend>Color</legend>
                 <?php
-                //$options = $this->requestAction('/names/getOptions');
-                //echo $this->Form->input('pintura', array('type' => 'select', 'options' => $options));
                 echo $this->Form->input('name', array('type' => 'text', 'label' => 'Pintura', 'placeholder' => 'Ingrese el nombre del color que busca'));
                 echo $this->Form->input('pintura', array('type' => 'hidden'));
                 ?>
             </fieldset>
         </div>
-        <div class="wrapper right">
+        <div class="wrapper mid">
             <fieldset>
                 <legend>Tamaño</legend>
                 <?php
@@ -31,21 +38,12 @@ echo $this->Form->create(
                 ?>
             </fieldset>
         </div>
-    </div>
-    <div class="wrapper height2">
-        <div class="wrapper left">
-            <fieldset>
-                <legend>Vista Previa</legend>
-                <div class="preview"></div>
-                <img id="label-preview-image" src="" alt=""/>
-            </fieldset>
-        </div>
         <div class="wrapper right">
             <fieldset>
                 <legend>Digite Aquí</legend>
                 <?php echo $this->Form->input('tanda_base'); ?>
-                <div class="actions" style="display: block; margin: 30px auto; width: 180px;">
-                    <a class="update-preview">Actualizar Vista Previa</a>
+                <div class="actions">
+                    <a class="update-preview">Actualizar</a>
                 </div>
             </fieldset>
         </div>

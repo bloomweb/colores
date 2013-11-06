@@ -40,12 +40,19 @@ $(function () {
         verifyIfUpdated();
     });
 
-    inputColor.change(function() {
-        verificarColor();
+    inputColor.autocomplete({
+        close: function( event, ui ) {
+            verificarColor();
+            verifyIfUpdated();
+        }
+    });
+
+    inputGaranty.blur(function() {
+        verificarGaranty();
         verifyIfUpdated();
     });
 
-    inputGaranty.change(function() {
+    inputGaranty.on('input', function() {
         verificarGaranty();
         verifyIfUpdated();
     });

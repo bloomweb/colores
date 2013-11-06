@@ -104,8 +104,9 @@ form#label-form .submit input {
 }
 
 form#label-form .input.text {
-    margin: 0 auto;
-    width: 90%;
+    margin: 0;
+    padding: 5px;
+    width: auto;
 }
 
 form#label-form fieldset {
@@ -116,19 +117,73 @@ form#label-form fieldset {
     min-height: 80px;
 }
 
-.wrapper.height2 fieldset {
-    min-height: 160px;
-}
-
 .wrapper.image, .wrapper.submit {
     text-align: center;
     width: 100%;
+}
+
+.logo {
+    width: 100%;
+}
+
+div.preview {
+    margin: 0;
 }
 
 .wrapper {
     margin-left: auto;
     margin-right: auto;
     width: 100%;
+}
+
+.wrapper.inputs .wrapper.left {
+    clear: none;
+    display: block;
+    float: left;
+    width: 40%;
+}
+
+.wrapper.inputs .wrapper.mid {
+    clear: none;
+    display: block;
+    float: left;
+    width: 18%;
+}
+
+.wrapper.inputs .wrapper.right {
+    clear: none;
+    display: block;
+    float: right;
+    width: 37%;
+}
+
+.wrapper.inputs .wrapper.right .input {
+    clear: none;
+    display: block;
+    float: left;
+    min-width: 200px;
+}
+
+.wrapper.inputs .wrapper.right .actions {
+    clear: none;
+    display: block;
+    float: right;
+    margin-top: 5px;
+    width: 120px;
+}
+
+.wrapper.inputs .wrapper.right .actions a {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.wrapper.inputs fieldset {
+    min-height: 71px;
+    padding: 1%;
+}
+
+#LabelTandaBase {
+    width: 80px;
 }
 
 .wrapper.left, .wrapper.right {
@@ -148,7 +203,6 @@ form#label-form fieldset {
 form#label-form .barcode, form#label-form .namecode {
     border: 0 none;
     display: inline-block;
-    min-height: 78px;
     width: 48%;
 }
 
@@ -187,7 +241,7 @@ div.login legend {
 }
 
 .ui-autocomplete {
-    max-height: 400px;
+    max-height: 200px;
     overflow-y: auto;
     /* prevent horizontal scrollbar */
     overflow-x: hidden;
