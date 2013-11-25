@@ -26,13 +26,13 @@
 			<HorizontalAlignment>Center</HorizontalAlignment>
 			<QuietZonesPadding Left="0" Top="0" Right="0" Bottom="0" />
 		</BarcodeObject>
-		<Bounds X="331" Y="410" Width="3313" Height="1035" />
+		<Bounds X="331" Y="680.314970847227" Width="3313" Height="793.700799321765" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
 			<Name>Name</Name>
-			<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
-			<BackColor Alpha="255" Red="255" Green="255" Blue="255" />
+			<ForeColor Alpha="255" Red="255" Green="255" Blue="255" />
+			<BackColor Alpha="255" Red="0" Green="0" Blue="0" />
 			<LinkedObjectName></LinkedObjectName>
 			<Rotation>Rotation0</Rotation>
 			<IsMirrored>False</IsMirrored>
@@ -47,24 +47,24 @@
 					<String>THAI</String>
 					<Attributes>
 						<Font Family="Tahoma" Size="36" Bold="True" Italic="False" Underline="False" Strikeout="False" />
-						<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+						<ForeColor Alpha="255" Red="255" Green="255" Blue="255" />
 					</Attributes>
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="346" Y="69" Width="4261" Height="304" />
+		<Bounds X="331" Y="69" Width="4422.04731050698" Height="304" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
 			<Name>ID_Name</Name>
-			<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
-			<BackColor Alpha="0" Red="255" Green="255" Blue="255" />
+			<ForeColor Alpha="255" Red="255" Green="255" Blue="255" />
+			<BackColor Alpha="255" Red="0" Green="0" Blue="0" />
 			<LinkedObjectName></LinkedObjectName>
 			<Rotation>Rotation0</Rotation>
 			<IsMirrored>False</IsMirrored>
 			<IsVariable>False</IsVariable>
 			<HorizontalAlignment>Center</HorizontalAlignment>
-			<VerticalAlignment>Top</VerticalAlignment>
+			<VerticalAlignment>Middle</VerticalAlignment>
 			<TextFitMode>ShrinkToFit</TextFitMode>
 			<UseFullFontHeight>True</UseFullFontHeight>
 			<Verticalized>False</Verticalized>
@@ -73,23 +73,23 @@
 					<String>1578</String>
 					<Attributes>
 						<Font Family="Arial" Size="28" Bold="True" Italic="False" Underline="False" Strikeout="False" />
-						<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+						<ForeColor Alpha="255" Red="255" Green="255" Blue="255" />
 					</Attributes>
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="3526" Y="413" Width="1215" Height="390" />
+		<Bounds X="3543.30713982931" Y="374.173233965975" Width="1213.22836467755" Height="822.047256440399" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
 			<Name>Name_Amount</Name>
-			<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
-			<BackColor Alpha="0" Red="255" Green="255" Blue="255" />
+			<ForeColor Alpha="255" Red="255" Green="255" Blue="255" />
+			<BackColor Alpha="255" Red="0" Green="0" Blue="0" />
 			<LinkedObjectName></LinkedObjectName>
 			<Rotation>Rotation0</Rotation>
 			<IsMirrored>False</IsMirrored>
 			<IsVariable>False</IsVariable>
-			<HorizontalAlignment>Center</HorizontalAlignment>
+			<HorizontalAlignment>Right</HorizontalAlignment>
 			<VerticalAlignment>Top</VerticalAlignment>
 			<TextFitMode>ShrinkToFit</TextFitMode>
 			<UseFullFontHeight>True</UseFullFontHeight>
@@ -99,12 +99,12 @@
 					<String>1 Gal.</String>
 					<Attributes>
 						<Font Family="Arial" Size="18" Bold="False" Italic="False" Underline="False" Strikeout="False" />
-						<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+						<ForeColor Alpha="255" Red="255" Green="255" Blue="255" />
 					</Attributes>
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="3781" Y="788" Width="720" Height="270" />
+		<Bounds X="3543.30713982931" Y="1201.8897818301" Width="1213.22839355469" Height="270" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -130,6 +130,6 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="3601" Y="1178" Width="1155" Height="285" />
+		<Bounds X="331" Y="408.188982508336" Width="1155" Height="226.771656949076" />
 	</ObjectInfo>
 </DieCutLabel>

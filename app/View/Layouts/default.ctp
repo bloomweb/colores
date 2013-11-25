@@ -90,7 +90,9 @@
         <?php echo $this->Session->flash('auth'); ?>
         <?php echo $this->fetch('content'); ?>
     </div>
-    <div id="footer"></div>
+    <div id="footer">
+        <?php echo $this->Html->image('logo_optsum.jpg', array('class' => 'logo-optsum')); ?>
+    </div>
 </div>
 <?php echo $this->element('sql_dump'); ?>
 </body>
