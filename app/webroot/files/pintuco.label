@@ -26,7 +26,7 @@
 			<HorizontalAlignment>Center</HorizontalAlignment>
 			<QuietZonesPadding Left="0" Top="0" Right="0" Bottom="0" />
 		</BarcodeObject>
-		<Bounds X="331" Y="680.314970847227" Width="3313" Height="793.700799321765" />
+		<Bounds X="331" Y="680.314970847227" Width="3028" Height="733.700799321765" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -116,7 +116,7 @@
 			<IsMirrored>False</IsMirrored>
 			<IsVariable>False</IsVariable>
 			<HorizontalAlignment>Center</HorizontalAlignment>
-			<VerticalAlignment>Top</VerticalAlignment>
+			<VerticalAlignment>Middle</VerticalAlignment>
 			<TextFitMode>ShrinkToFit</TextFitMode>
 			<UseFullFontHeight>True</UseFullFontHeight>
 			<Verticalized>False</Verticalized>
@@ -131,5 +131,28 @@
 			</StyledText>
 		</TextObject>
 		<Bounds X="331" Y="408.188982508336" Width="1155" Height="226.771656949076" />
+	</ObjectInfo>
+	<ObjectInfo>
+		<DateTimeObject>
+			<Name>FECHA-HORA</Name>
+			<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+			<BackColor Alpha="0" Red="255" Green="255" Blue="255" />
+			<LinkedObjectName></LinkedObjectName>
+			<Rotation>Rotation0</Rotation>
+			<IsMirrored>False</IsMirrored>
+			<IsVariable>False</IsVariable>
+			<HorizontalAlignment>Right</HorizontalAlignment>
+			<VerticalAlignment>Middle</VerticalAlignment>
+			<TextFitMode>ShrinkToFit</TextFitMode>
+			<UseFullFontHeight>True</UseFullFontHeight>
+			<Verticalized>False</Verticalized>
+			<DateTimeFormat>DayMonthLongYear</DateTimeFormat>
+			<Font Family="Arial" Size="12" Bold="False" Italic="False" Underline="False" Strikeout="False" />
+			<PreText>Fab:</PreText>
+			<PostText></PostText>
+			<IncludeTime>False</IncludeTime>
+			<Use24HourFormat>False</Use24HourFormat>
+		</DateTimeObject>
+		<Bounds X="2265" Y="408.188982508336" Width="1156.53545044029" Height="226.771656949076" />
 	</ObjectInfo>
 </DieCutLabel>
