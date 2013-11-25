@@ -52,10 +52,10 @@ $(function () {
         verifyIfUpdated();
     });
 
-    inputGaranty.on('input', function() {
+    /*inputGaranty.on('input', function() {
         verificarGaranty();
         verifyIfUpdated();
-    });
+    });*/
 
     cargarColores();
     verificarImpresora();
