@@ -115,7 +115,7 @@
 			<Rotation>Rotation0</Rotation>
 			<IsMirrored>False</IsMirrored>
 			<IsVariable>False</IsVariable>
-			<HorizontalAlignment>Center</HorizontalAlignment>
+			<HorizontalAlignment>Left</HorizontalAlignment>
 			<VerticalAlignment>Middle</VerticalAlignment>
 			<TextFitMode>ShrinkToFit</TextFitMode>
 			<UseFullFontHeight>True</UseFullFontHeight>
