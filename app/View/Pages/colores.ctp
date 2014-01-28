@@ -52,6 +52,14 @@ echo $this->Form->create(
         <?php echo $this->Form->input('impresora', array('label' => 'Seleccione una impresora', 'type' => 'select', 'empty' => '- Ninguna -')); ?>
     </div>
     <div class="wrapper submit">
-        <?php echo $this->Form->submit('Imprimir'); ?>
+        <div class="filler-div"></div>
+        <div class="button-submit-div">
+            <?php echo $this->Form->submit('Imprimir'); ?>
+        </div>
+        <div class="logo-div">
+            <a href="http://www.optsum.com" target="_blank"><?php echo $this->Html->image('logo_optsum.jpg', array('class' => 'logo-optsum')); ?></a>
+            <p class="logo-text">Diseñado y desarrollado por OPTSUM INGENIERIA S.A.S</p>
+            <p class="logo-text">Copyright 2014. All rights reserved</p>
+            <p class="logo-text"><a href="http://www.optsum.com" target="_blank">www.optsum.com</a></p>
     </div>
 <?php echo $this->Form->end(); ?>

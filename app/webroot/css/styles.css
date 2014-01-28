@@ -1,9 +1,22 @@
 /* -------------------- GENERIC -------------------- */
 
+.filler-div, .button-submit-div, .logo-div {
+    clear: none;
+    float: left;
+    padding: 0;
+    width: 33.33%;
+}
+
 .logo-optsum {
     display: block;
     margin: 0 auto;
-    width: 64px;
+    width: 128px;
+}
+
+.logo-text {
+    font-size: 0.6em;
+    margin: 0.4em;
+    padding: 0;
 }
 
 body {
